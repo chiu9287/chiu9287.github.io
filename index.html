@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>點餐系統</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>點餐系統</h1>
+
+  <!-- 餐點列表 -->
+  <div class="menu">
+    <!-- 以下為所有餐點 -->
+    <div class="menu-item" data-name="鴨肉油飯" data-price="60">
+      <img src="鴨肉米糕.jpg" alt="鴨肉油飯">
+      <h3>鴨肉油飯</h3>
+      <p>NT$60</p>
+      <div class="controls">
+        <button class="minus">－</button>
+        <span class="qty">0</span>
+        <button class="plus">＋</button>
+      </div>
+    </div>
+
+    <div class="menu-item" data-name="豬肉米糕" data-price="60">
+      <img src="豬肉米糕.png" alt="豬肉米糕">
+      <h3>豬肉米糕</h3>
+      <p>NT$60</p>
+      <div class="controls">
+        <button class="minus">－</button>
+        <span class="qty">0</span>
+        <button class="plus">＋</button>
+      </div>
+    </div>
+
+    <div class="menu-item" data-name="素食油飯" data-price="60">
+      <img src="素食米糕.jpg" alt="素食油飯">
+      <h3>素食油飯</h3>
+      <p>NT$60</p>
+      <div class="controls">
+        <button class="minus">－</button>
+        <span class="qty">0</span>
+        <button class="plus">＋</button>
+      </div>
+    </div>
+
+    <div class="menu-item" data-name="米糕豆" data-price="50">
+      <img src="米豆糕.png" alt="米糕豆">
+      <h3>米糕豆</h3>
+      <p>NT$50</p>
+      <div class="controls">
+        <button class="minus">－</button>
+        <span class="qty">0</span>
+        <button class="plus">＋</button>
+      </div>
+    </div>
+
+    <div class="menu-item" data-name="八寶羹" data-price="70">
+      <img src="八寶羹.jpg" alt="八寶羹">
+      <h3>八寶羹</h3>
+      <p>NT$70</p>
+      <div class="controls">
+        <button class="minus">－</button>
+        <span class="qty">0</span>
+        <button class="plus">＋</button>
+      </div>
+    </div>
+
+    <div class="menu-item" data-name="羊肉爐" data-price="120">
+      <img src="羊肉爐.jpg" alt="羊肉爐">
+      <h3>羊肉爐</h3>
+      <p>NT$120</p>
+      <div class="controls">
+        <button class="minus">－</button>
+        <span class="qty">0</span>
+        <button class="plus">＋</button>
+      </div>
+    </div>
+
+    <div class="menu-item" data-name="干貝豬肚湯" data-price="100">
+      <img src="豬肚.jpg" alt="干貝豬肚湯">
+      <h3>干貝豬肚湯</h3>
+      <p>NT$100</p>
+      <div class="controls">
+        <button class="minus">－</button>
+        <span class="qty">0</span>
+        <button class="plus">＋</button>
+      </div>
+    </div>
+
+    <div class="menu-item" data-name="高湯" data-price="30">
+      <img src="鮮味高湯.png" alt="高湯">
+      <h3>高湯</h3>
+      <p>NT$30</p>
+      <div class="controls">
+        <button class="minus">－</button>
+        <span class="qty">0</span>
+        <button class="plus">＋</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 顧客資訊 -->
+  <div class="customer-info">
+    <h2>填寫訂單資訊</h2>
+    <label>姓名：<input type="text" id="name" required></label><br>
+    <label>手機號碼：<input type="tel" id="phone" required></label><br>
+    <label>取餐日期：<input type="date" id="pickupDate" required></label><br>
+    <label>備註：<textarea id="note" rows="3" placeholder="可輸入備註..."></textarea></label><br>
+    <p id="total">總金額：NT$0</p>
+    <button onclick="submitOrder()">送出訂單</button>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
