@@ -166,3 +166,38 @@ body {
 #historyList li {
   margin-bottom: 8px;
 }
+
+
+@media (max-width: 768px) {
+  .menu-item {
+    width: 45%;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  .submit-btn {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-item {
+    width: 100%;
+  }
+
+  .title-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .title-bar h1 {
+    font-size: 18px;
+    margin-top: 5px;
+  }
+
+  .form-group {
+    margin: 8px;
+  }
+}
