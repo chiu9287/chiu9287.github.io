@@ -1,0 +1,353 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  background: #f7f7f7;
+  text-align: center;
+  padding-bottom: 80px;
+}
+.banner {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.7);
+  padding: 20px 40px;
+  border-radius: 12px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #000;
+}
+#stepIndicator {
+  max-width: 500px;
+  margin: 10px auto;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  gap: 1px;
+  user-select: none;
+  font-family: "Segoe UI", sans-serif;
+}
+.step {
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.step .number {
+  color: black;
+  background: rgb(255, 255, 255);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+.step.current {
+  background: black;
+  color: white;
+}
+.step.current .number {
+  background: black;
+  color: white;
+}
+.arrow {
+  align-self: center;
+  color: gray;
+  user-select: none;
+}
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px auto;
+  max-width: 1000px;
+}
+.menu-item {
+  background: #fff;
+  border-radius: 12px;
+  width: 200px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  position: relative;
+}
+.menu-item img {
+  width: 100%;
+  border-radius: 8px;
+}
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.controls button {
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+  margin: 0 5px;
+}
+.controls button:hover {
+  transform: scale(1.1);
+}
+.quantity-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: black;
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  line-height: 24px;
+}
+.quantity-badge.inactive {
+  background: white;
+  color: black;
+}
+.form {
+  background: white;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 12px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.form-group {
+  margin-bottom: 15px;
+  text-align: center;
+}
+label .required {
+  color: red;
+}
+.total {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+.modal-content {
+  background: white;
+  padding: 20px;
+  margin: 100px auto;
+  border-radius: 10px;
+  max-width: 400px;
+  text-align: center;
+}
+#loadingImage {
+  max-width: 150px;
+  height: auto;
+}
+#socialLinks a {
+  color: #007bff;
+  text-decoration: none;
+}
+#socialLinks a:hover {
+  text-decoration: underline;
+}
+#historyButton {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+#historyButton img {
+  width: 100%;
+  border-radius: 50%;
+}
+.invalid input, .invalid textarea {
+  border: 2px solid red;
+}
+
+/* --- footer 按鈕美化 --- */
+#footerControls {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  padding: 10px 0;
+  box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+#footerControls .footer-buttons {
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+#backBtn, #nextBtn {
+  flex: 1;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  margin-top: 0;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+#backBtn {
+  background: #ff4d4f;
+  color: white;
+}
+#backBtn:hover {
+  background: #d9363e;
+}
+#nextBtn {
+  background: #52c41a;
+  color: white;
+}
+#nextBtn:hover {
+  background: #389e0d;
+}
+#socialLinks {
+  flex: 2;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 14px;
+  text-align: left;
+}
+
+/* --- form 區塊美化 --- */
+.form {
+  background: white;
+  padding: 28px 24px 24px 24px;
+  margin: 20px auto;
+  border-radius: 16px;
+  max-width: 500px;
+  box-shadow: 0 7px 32px rgba(0,0,0,0.07), 0 1.5px 4px rgba(0,0,0,0.04);
+}
+.form-group {
+  margin-bottom: 24px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-group label {
+  font-weight: 600;
+  font-size: 16px;
+}
+.form-group input,
+.form-group textarea {
+  padding: 10px 12px;
+  border: 1.4px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  background: #f9fafb;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  border: 1.4px solid #52c41a;
+  background: #fff;
+  box-shadow: 0 0 0 2px #b7eb8f55;
+}
+.form-group.invalid input,
+.form-group.invalid textarea {
+  border: 2px solid #ff4d4f;
+  background: #fff0f1;
+}
+.total {
+  font-size: 22px;
+  font-weight: bold;
+  color: #52c41a;
+  margin-top: 18px;
+  text-align: right;
+  letter-spacing: 1px;
+}
+
+/* --- 加減按鈕與數量置中 --- */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-top: 10px;
+}
+.controls button {
+  background: #efefef;
+  color: #222;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.controls button:hover {
+  background: #ddefff;
+  color: #52c41a;
+  transform: scale(1.1);
+}
+
+/* 新增：數量 badge 取消，改用 controls 內置中顯示 */
+.controls .quantity-display {
+  min-width: 36px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #52c41a;
+  background: none;
+  border: none;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* 隱藏原本 menu-item 角落 badge */
+.quantity-badge {
+  display: none !important;
+}
