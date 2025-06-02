@@ -1,5 +1,6 @@
 body {
   font-family: "Segoe UI", sans-serif;
+<<<<<<< HEAD
   margin: 0;
   background: #f7f7f7;
   text-align: center;
@@ -7,6 +8,17 @@ body {
 }
 .banner {
   position: relative;
+=======
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  background: #f7f7f7;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+>>>>>>> d43e68b48bfaee33a4a9ea9af73187117b11c58a
   height: 300px;
   overflow: hidden;
 }
@@ -27,6 +39,7 @@ body {
   font-weight: bold;
   color: #000;
 }
+<<<<<<< HEAD
 #stepIndicator {
   max-width: 500px;
   margin: 10px auto;
@@ -70,6 +83,9 @@ body {
   color: gray;
   user-select: none;
 }
+=======
+
+>>>>>>> d43e68b48bfaee33a4a9ea9af73187117b11c58a
 .menu {
   display: flex;
   flex-wrap: wrap;
@@ -79,11 +95,19 @@ body {
   max-width: 1000px;
 }
 .menu-item {
+<<<<<<< HEAD
   background: #fff;
   border-radius: 12px;
   width: 200px;
   padding: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+=======
+  width: 220px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+>>>>>>> d43e68b48bfaee33a4a9ea9af73187117b11c58a
   position: relative;
 }
 .menu-item img {
@@ -97,6 +121,7 @@ body {
   margin-top: 10px;
 }
 .controls button {
+<<<<<<< HEAD
   background: black;
   color: white;
   border: none;
@@ -126,10 +151,34 @@ body {
   height: 24px;
   font-size: 14px;
   line-height: 24px;
+=======
+  width: 40px;
+  height: 40px;
+  background: black;
+  color: white;
+  border-radius: 50%;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+}
+.quantity-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+>>>>>>> d43e68b48bfaee33a4a9ea9af73187117b11c58a
 }
 .quantity-badge.inactive {
   background: white;
   color: black;
+<<<<<<< HEAD
 }
 .form {
   background: white;
@@ -184,12 +233,71 @@ button {
 #socialLinks a:hover {
   text-decoration: underline;
 }
+=======
+  border: 1px solid black;
+}
+.quantity-badge.active {
+  background: black;
+  color: white;
+}
+
+.form {
+  margin: 40px auto;
+  background: #fff;
+  padding: 20px;
+  display: inline-block;
+  text-align: left;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.form-group {
+  margin-bottom: 15px;
+}
+.required {
+  color: red;
+}
+.invalid input,
+.invalid textarea {
+  border: 1px solid red;
+}
+.total {
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+/* Modal 視窗 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+.modal-content {
+  background-color: #fff;
+  margin: 20% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+}
+.modal-content img {
+  width: 60px;
+  margin-bottom: 15px;
+}
+
+>>>>>>> d43e68b48bfaee33a4a9ea9af73187117b11c58a
 #historyButton {
   position: fixed;
   right: 20px;
   bottom: 20px;
   width: 60px;
   height: 60px;
+<<<<<<< HEAD
   border-radius: 50%;
   cursor: pointer;
 }
@@ -351,3 +459,62 @@ button {
 .quantity-badge {
   display: none !important;
 }
+=======
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  cursor: pointer;
+  z-index: 10000;
+}
+#historyButton img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+#historyList {
+  max-height: 300px;
+  overflow-y: auto;
+  text-align: left;
+}
+#historyList ul {
+  padding-left: 20px;
+}
+#historyList li {
+  margin-bottom: 8px;
+}
+
+
+@media (max-width: 768px) {
+  .menu-item {
+    width: 45%;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  .submit-btn {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-item {
+    width: 100%;
+  }
+
+  .title-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .title-bar h1 {
+    font-size: 18px;
+    margin-top: 5px;
+  }
+
+  .form-group {
+    margin: 8px;
+  }
+}
+>>>>>>> d43e68b48bfaee33a4a9ea9af73187117b11c58a
