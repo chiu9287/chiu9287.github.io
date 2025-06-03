@@ -43,10 +43,6 @@
       <span id="total">0</span> 元
     </div>
   </div>
-  <!-- 歷史紀錄按鈕（固定在右下角） -->
-  <div id="historyButton">
-    <img src="history.jpg" alt="歷史紀錄">
-  </div>
   <!-- 底部流程按鈕 -->
   <div id="footerControls">
     <div class="footer-buttons">
@@ -74,10 +70,30 @@
       <p id="loadingText">訂單處理中，請稍候...</p>
     </div>
   </div>
+  <!-- 購物車按鈕（固定在右下角，歷史訂單上方） -->
+  <div id="cartButton" onclick="openCart()">
+    <span class="cart-label">購物車</span>
+    <img src="購物車.jpg" alt="購物車">
+    <span id="cartBadge" class="cart-badge" style="display:none;">0</span>
+  </div>
+  <!-- 購物車模態視窗 -->
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <button id="cartCloseBtn" class="history-close-btn" onclick="closeCart()">關閉</button>
+      <h3>購物車</h3>
+      <div id="cartList"></div>
+    </div>
+  </div>
+  
+  <!-- 歷史紀錄按鈕（固定在右下角） -->
+  <div id="historyButton" onclick="openHistory()">
+    <span class="history-label">歷史訂單</span>
+    <img src="history.jpg" alt="歷史紀錄">
+  </div>
   <!-- 歷史訂單模態視窗 -->
   <div id="historyModal" class="modal">
     <div class="modal-content">
-      <button onclick="closeHistory()">關閉</button>
+        <button id="historyCloseBtn" onclick="closeHistory()">關閉</button>
       <h3>歷史訂單</h3>
       <div id="historyList"></div>
     </div>

@@ -1,17 +1,65 @@
 // 菜單資料陣列，每個物件包含菜名、價格、key、圖片路徑
 const menuList = [
-  { name: '鴨肉米糕', price: 130, key: 'qty1', img: 'img/鴨肉米糕.jpg' },
-  { name: '豬肉油飯', price: 120, key: 'qty2', img: 'img/豬肉油飯.jpg' },
-  { name: '素食油飯', price: 120, key: 'qty3', img: 'img/素食油飯.jpg' },
-  { name: '八寶羹', price: 550, key: 'qty4', img: 'img/八寶羹.jpg' },
-  { name: '白菜滷', price: 550, key: 'qty5', img: 'img/白菜滷.jpg' },
-  { name: '金針排骨湯', price: 45, key: 'qty6', img: 'img/金針排骨湯.jpg' },
-  { name: '蘿蔔排骨湯', price: 45, key: 'qty7', img: 'img/蘿蔔排骨湯.jpg' },
-  { name: '干貝豬肚湯', price: 450, key: 'qty8', img: 'img/干貝豬肚湯.jpg' }
+  { name: '鴨肉米糕', price: 130,type:"飯",unit:"(份/600g)", key: 'qty1', img: 'img/鴨肉米糕.jpg' },
+  { name: '豬肉油飯', price: 130,type:"飯",unit:"(份/600g)", key: 'qty2', img: 'img/豬肉油飯.jpg' },
+  { name: '素食油飯', price: 120,type:"飯",unit:"(份/600g)", key: 'qty3', img: 'img/素食油飯.jpg' },
+  { name: '八寶羹', price: 550,type:"湯",unit:"(份/1800g)", key: 'qty4', img: 'img/八寶羹.jpg' },
+  { name: '白菜滷', price: 350,type:"菜",unit:"(份/1800g)", key: 'qty5', img: 'img/白菜滷.jpg' },
+  { name: '金針排骨湯', price: 45,type:"湯",unit:"碗", key: 'qty6', img: 'img/金針排骨湯.jpg' },
+  { name: '蘿蔔排骨湯', price: 45,type:"湯",unit:"碗", key: 'qty7', img: 'img/蘿蔔排骨湯.jpg' },
+  { name: '干貝豬肚湯', price: 450,type:"湯",unit:"(份/1800g)", key: 'qty8', img: 'img/干貝豬肚湯.jpg' }
 ];
 
 let qtyStatus = {};
 menuList.forEach(item => { qtyStatus[item.key] = 0; });
+
+function renderMenu() {
+  const menuContainer = document.querySelector('.menu');
+  menuContainer.innerHTML = '';
+
+  // 依 type 分組
+  const typeGroups = {};
+  menuList.forEach(item => {
+    if (!typeGroups[item.type]) typeGroups[item.type] = [];
+    typeGroups[item.type].push(item);
+  });
+
+  // 依 type 顯示每一列
+  Object.keys(typeGroups).forEach(type => {
+    // 建立一列 row
+    const rowDiv = document.createElement('div');
+    rowDiv.className = 'menu-row';
+    // 每個 row 裡面放多個 menu-item
+    typeGroups[type].forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'menu-item';
+      div.dataset.name = item.name;
+      div.dataset.key = item.key;
+      const qty = getQtyByKey(item.key);
+      div.innerHTML = `
+        <img src="${item.img}" alt="${item.name}">
+        <h3>${item.name}</h3>
+        <span>NT$${item.price}</span>
+        <span style="color :red">${item.unit}</span>
+        <div class="controls">
+          <button class="minus" aria-label="減少">－</button>
+          <span class="quantity-display">${qty}</span>
+          <button class="plus" aria-label="增加">＋</button>
+        </div>
+      `;
+      rowDiv.appendChild(div);
+    });
+    // 在每列前加上類型標題
+    const typeTitle = document.createElement('div');
+    typeTitle.className = 'menu-type-title';
+    typeTitle.textContent = type;
+    menuContainer.appendChild(typeTitle);
+    menuContainer.appendChild(rowDiv);
+  });
+
+  bindControlButtons();
+  updateTotal();
+}
 
 let currentStep = 1;
 
@@ -91,30 +139,6 @@ function renderStepIndicator() {
   });
 }
 
-function renderMenu() {
-  const menuContainer = document.querySelector('.menu');
-  menuContainer.innerHTML = '';
-  menuList.forEach(item => {
-    const div = document.createElement('div');
-    div.className = 'menu-item';
-    div.dataset.name = item.name;
-    div.dataset.key = item.key;
-    const qty = getQtyByKey(item.key);
-    div.innerHTML = `
-      <img src="${item.img}" alt="${item.name}">
-      <h3>${item.name}</h3>
-      <p>NT$${item.price}</p>
-      <div class="controls">
-        <button class="minus" aria-label="減少">－</button>
-        <span class="quantity-display">${qty}</span>
-        <button class="plus" aria-label="增加">＋</button>
-      </div>
-    `;
-    menuContainer.appendChild(div);
-  });
-  bindControlButtons();
-  updateTotal();
-}
 
 function bindControlButtons() {
   document.querySelectorAll('.plus').forEach(btn => {
@@ -169,6 +193,21 @@ function updateTotal() {
   const total = calculateTotal();
   const totalEl = document.getElementById('total');
   if (totalEl) totalEl.textContent = total;
+
+  // 更新購物車徽章
+  let cartCount = 0;
+  menuList.forEach(item => {
+    cartCount += getQtyByKey(item.key);
+  });
+  const badge = document.getElementById('cartBadge');
+  if (badge) {
+    if (cartCount > 0) {
+      badge.textContent = cartCount;
+      badge.style.display = 'flex';
+    } else {
+      badge.style.display = 'none';
+    }
+  }
 }
 
 function validateForm() {
@@ -261,8 +300,9 @@ function resetForm() {
 function showHistory() {
   const modal = document.getElementById('historyModal');
   modal.style.display = 'block';
+  document.body.classList.add('modal-open');
   const historyList = document.getElementById('historyList');
-  const history = JSON.parse(localStorage.getItem('orderHistory')) || [];
+  const history = getHistoryOrders(); // 這裡改成用排序後的
   if (history.length === 0) {
     historyList.innerHTML = '<p>尚無歷史訂單</p>';
   } else {
@@ -279,15 +319,23 @@ function showHistory() {
 }
 function closeHistory() {
   document.getElementById('historyModal').style.display = 'none';
+  document.body.classList.remove('modal-open');
 }
 function saveOrderToHistory(order) {
   const history = JSON.parse(localStorage.getItem('orderHistory')) || [];
+  order.createdAt = Date.now(); // 新增訂單時間
   history.push(order);
   localStorage.setItem('orderHistory', JSON.stringify(history));
 }
 
+function getHistoryOrders() {
+  const history = JSON.parse(localStorage.getItem('orderHistory')) || [];
+  // 依 createdAt 由新到舊排序
+  return history.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+}
+
 function updateStepUI() {
-  menuSection.style.display = currentStep === 1 ? 'flex' : 'none';
+  menuSection.style.display = currentStep === 1 ? 'block' : 'none';
   formSection.style.display = currentStep === 2 ? 'block' : 'none';
   confirmSection.style.display = (currentStep === 3 || currentStep === 4) ? 'block' : 'none';
   if (currentStep === 1) {
@@ -340,3 +388,67 @@ function renderConfirmation() {
     <p><strong>總金額：</strong>NT$${total}</p>
   `;
 }
+
+
+let allHistoryOrders = []; // 所有歷史訂單
+let loadedCount = 0;       // 已載入數量
+const LOAD_BATCH = 3;      // 每次載入幾筆
+
+function openHistory() {
+  // 假設 getHistoryOrders() 會回傳所有歷史訂單陣列（新到舊排序）
+  allHistoryOrders = getHistoryOrders();
+  loadedCount = 0;
+  document.getElementById('historyList').innerHTML = '';
+  loadMoreHistory();
+  document.getElementById('historyModal').style.display = 'block';
+}
+
+function loadMoreHistory() {
+  const list = document.getElementById('historyList');
+  const nextBatch = allHistoryOrders.slice(loadedCount, loadedCount + LOAD_BATCH);
+  nextBatch.forEach(order => {
+    const div = document.createElement('div');
+    div.className = 'history-order';
+    div.innerText = JSON.stringify(order); // 你可自行美化顯示
+    list.appendChild(div);
+  });
+  loadedCount += nextBatch.length;
+}
+
+// 滾動到底時自動載入更多
+document.getElementById('historyList').addEventListener('scroll', function() {
+  if (this.scrollTop + this.clientHeight >= this.scrollHeight - 10) {
+    if (loadedCount < allHistoryOrders.length) {
+      loadMoreHistory();
+    }
+  }
+});
+function openCart() {
+  const cartList = document.getElementById('cartList');
+  let hasItem = false;
+  let html = '';
+  let total = 0;
+  menuList.forEach(item => {
+    const qty = getQtyByKey(item.key);
+    if (qty > 0) {
+      hasItem = true;
+      html += `<div style="margin-bottom:12px;">
+        <strong>${item.name}</strong> × ${qty}（NT$${item.price * qty}）
+      </div>`;
+      total += item.price * qty;
+    }
+  });
+  if (hasItem) {
+    html += `<hr><div style="font-weight:bold;text-align:right;">總金額：NT$${total}</div>`;
+  } else {
+    html = '<p>購物車目前沒有餐點</p>';
+  }
+  cartList.innerHTML = html;
+  document.getElementById('cartModal').style.display = 'block';
+  document.body.classList.add('modal-open'); // 加這一行
+}
+function closeCart() {
+  document.getElementById('cartModal').style.display = 'none';
+  document.body.classList.remove('modal-open');
+}
+
