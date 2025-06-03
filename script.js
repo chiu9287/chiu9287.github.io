@@ -1,13 +1,16 @@
 // 菜單資料陣列，每個物件包含菜名、價格、key、圖片路徑
 const menuList = [
-  { name: '鴨肉米糕', price: 130,type:"飯",unit:"(份/600g)", key: 'qty1', img: 'img/鴨肉米糕.jpg' },
-  { name: '豬肉油飯', price: 130,type:"飯",unit:"(份/600g)", key: 'qty2', img: 'img/豬肉油飯.jpg' },
-  { name: '素食油飯', price: 120,type:"飯",unit:"(份/600g)", key: 'qty3', img: 'img/素食油飯.jpg' },
-  { name: '八寶羹', price: 550,type:"湯",unit:"(份/1800g)", key: 'qty4', img: 'img/八寶羹.jpg' },
-  { name: '白菜滷', price: 350,type:"菜",unit:"(份/1800g)", key: 'qty5', img: 'img/白菜滷.jpg' },
-  { name: '金針排骨湯', price: 45,type:"湯",unit:"碗", key: 'qty6', img: 'img/金針排骨湯.jpg' },
-  { name: '蘿蔔排骨湯', price: 45,type:"湯",unit:"碗", key: 'qty7', img: 'img/蘿蔔排骨湯.jpg' },
-  { name: '干貝豬肚湯', price: 450,type:"湯",unit:"(份/1800g)", key: 'qty8', img: 'img/干貝豬肚湯.jpg' }
+  { name: '鴨肉米糕',   price: 130,type:"飯",unit:"(份/600g)", key: 'qty1', img: 'img/鴨肉米糕.jpg' },
+  { name: '豬肉油飯',   price: 130,type:"飯",unit:"(份/600g)", key: 'qty2', img: 'img/豬肉油飯.jpg' },
+  { name: '素食油飯',   price: 120,type:"飯",unit:"(份/600g)", key: 'qty3', img: 'img/素食油飯.jpg' },
+  { name: '八寶羹',     price: 550,type:"菜",unit:"(份/1800g)", key: 'qty4', img: 'img/八寶羹.jpg', special:"冷凍" },
+  { name: '白菜滷',     price: 350,type:"菜",unit:"(份/1800g)", key: 'qty5', img: 'img/白菜滷.jpg', special:"冷凍" },
+  { name: '蘿蔔排骨湯', price: 45,type:"湯",unit:"碗", key: 'qty6', img: 'img/蘿蔔排骨湯.jpg' },
+  { name: '蛤蠣湯',     price: 35,type:"湯",unit:"碗", key: 'qty7', img: 'img/蛤蠣湯.jpg' },
+  { name: '金針排骨湯', price: 45,type:"湯",unit:"碗", key: 'qty8', img: 'img/金針排骨湯.jpg' },
+  { name: '貢丸湯',     price: 30,type:"湯",unit:"碗", key: 'qty9', img: 'img/貢丸湯.jpg' },
+  { name: '干貝豬肚湯', price: 450,type:"湯",unit:"(份/1800g)", key: 'qty10', img: 'img/干貝豬肚湯.jpg', special:"冷凍" },
+  
 ];
 
 let qtyStatus = {};
@@ -41,6 +44,7 @@ function renderMenu() {
         <h3>${item.name}</h3>
         <span>NT$${item.price}</span>
         <span style="color :red">${item.unit}</span>
+        ${item.special === "冷凍" ? '<br><span style="color:rgb(101, 163, 224);">**該品項為冷凍包裝**</span>' : ''}
         <div class="controls">
           <button class="minus" aria-label="減少">－</button>
           <span class="quantity-display">${qty}</span>
@@ -235,13 +239,15 @@ async function submitOrder() {
     alert('請選擇至少一樣餐點');
     return;
   }
+  const itemNames = menuList.map(item => item.name);
   const data = {
     timestamp: new Date().toLocaleString('zh-TW'),
     name: document.getElementById('name').value.trim(),
     phone: document.getElementById('phone').value.trim(),
     pickupDate: document.getElementById('pickupDate').value,
     note: document.getElementById('note').value.trim(),
-    total: calculateTotal()
+    total: calculateTotal(),
+    itemNames // 這裡加進 data 物件
   };
   menuList.forEach(item => {
     data[item.key] = getQtyByKey(item.key);
@@ -252,7 +258,8 @@ async function submitOrder() {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
+      itemNames: itemNames // 新增這一行
     });
     setTimeout(() => {
       updateLoadingComplete('訂單已送出，感謝您的訂購！');
@@ -385,6 +392,7 @@ function renderConfirmation() {
     ${note ? `<p><strong>備註：</strong>${note}</p>` : ''}
     <p><strong>訂購項目：</strong></p>
     <ul style="text-align:center;">${itemHTML}</ul>
+    <hr>
     <p><strong>總金額：</strong>NT$${total}</p>
   `;
 }

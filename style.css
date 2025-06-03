@@ -232,16 +232,22 @@ button {
   z-index: 9999;
   position: fixed;
   right: 20px;
-  bottom: 20px;
+  bottom: 10%;
   width: 60px;
   height: 60px;
   border-radius: 50%;
   cursor: pointer;
 }
 #historyButton img {
-  
   width: 100%;
   border-radius: 50%;
+  border: 3px solid #000000;   /* 藍色外框，可依需求調整顏色 */
+  box-sizing: border-box;
+  background: #fff;
+  padding: 2px;                /* 讓外框與圖片有點間距 */
+  border-radius: 50%;          /* 保持圓形 */
+  transition: border 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.10);
 }
 .invalid input, .invalid textarea {
   border: 2px solid red;
@@ -290,7 +296,7 @@ body.modal-open #historyButton img {
   z-index: 9999;
   position: fixed;
   right: 20px;
-  bottom: 100px; /* 比歷史訂單高一點 */
+  bottom: 22%;
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -318,6 +324,13 @@ body.modal-open #historyButton img {
 #cartButton img {
   width: 100%;
   border-radius: 50%;
+  border: 3px solid #000000;   /* 藍色外框，可依需求調整顏色 */
+  box-sizing: border-box;
+  background: #fff;
+  padding: 2px;                /* 讓外框與圖片有點間距 */
+  border-radius: 50%;          /* 保持圓形 */
+  transition: border 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.10);
 }
 .cart-badge {
   position: absolute;
