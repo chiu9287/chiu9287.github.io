@@ -81,5 +81,14 @@
     "key": "qty10",
     "img": "img/干貝豬肚湯.jpg",
     "special": "冷凍"
+  },
+  {
+    "name": "測試",
+    "price": 100,
+    "type": "菜",
+    "unit": "(碗/100g)",
+    "key": "qty11",
+    "img": "img/測試.jpg",
+    "special": ""
   }
 ]
