@@ -1,20 +1,13 @@
-// 菜單資料陣列，每個物件包含菜名、價格、key、圖片路徑
-const menuList = [
-  { name: '鴨肉米糕',   price: 130,type:"飯",unit:"(份/600g)", key: 'qty1', img: 'img/鴨肉米糕.jpg' },
-  { name: '豬肉油飯',   price: 130,type:"飯",unit:"(份/600g)", key: 'qty2', img: 'img/豬肉油飯.jpg' },
-  { name: '素食油飯',   price: 120,type:"飯",unit:"(份/600g)", key: 'qty3', img: 'img/素食油飯.jpg' },
-  { name: '八寶羹',     price: 550,type:"菜",unit:"(份/1800g)", key: 'qty4', img: 'img/八寶羹.jpg', special:"冷凍" },
-  { name: '白菜滷',     price: 350,type:"菜",unit:"(份/1800g)", key: 'qty5', img: 'img/白菜滷.jpg', special:"冷凍" },
-  { name: '蘿蔔排骨湯', price: 45,type:"湯",unit:"碗", key: 'qty6', img: 'img/蘿蔔排骨湯.jpg' },
-  { name: '蛤蠣湯',     price: 35,type:"湯",unit:"碗", key: 'qty7', img: 'img/蛤蠣湯.jpg' },
-  { name: '金針排骨湯', price: 45,type:"湯",unit:"碗", key: 'qty8', img: 'img/金針排骨湯.jpg' },
-  { name: '貢丸湯',     price: 30,type:"湯",unit:"碗", key: 'qty9', img: 'img/貢丸湯.jpg' },
-  { name: '干貝豬肚湯', price: 450,type:"湯",unit:"(份/1800g)", key: 'qty10', img: 'img/干貝豬肚湯.jpg', special:"冷凍" },
-  
-];
-
+let menuList = [];
 let qtyStatus = {};
-menuList.forEach(item => { qtyStatus[item.key] = 0; });
+
+async function loadMenuList() {
+  const res = await fetch('menu.json');
+  menuList = await res.json();
+  qtyStatus = {};
+  menuList.forEach(item => { qtyStatus[item.key] = 0; });
+  renderMenu();
+}
 
 function renderMenu() {
   const menuContainer = document.querySelector('.menu');
@@ -76,7 +69,7 @@ window.onload = () => {
   backBtn = document.getElementById('backBtn');
   nextBtn = document.getElementById('nextBtn');
 
-  renderMenu();
+  loadMenuList(); // 載入菜單
   formSection.style.display = 'none';
   confirmSection.style.display = 'none';
   renderStepIndicator();

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>菜單管理後台</title>
+  <link rel="stylesheet" href="admin_style.css" />
+  <meta name="robots" content="noindex">
+</head>
+<body>
+  <h2>菜單管理後台</h2>
+  <div id="loginSection">
+    <input type="text" id="username" placeholder="帳號">
+    <input type="password" id="password" placeholder="密碼">
+    <button id="loginBtn">登入</button>
+    <div id="loginMsg" class="error"></div>
+  </div>
+  <div id="adminSection" class="hidden">
+    <div id="addForm"></div>
+    <h3>新增菜單項目</h3>
+    <div id="addForm">
+      <input type="text" id="name" placeholder="菜名" required>
+      <input type="number" id="price" placeholder="價格" required>
+      <select id="type">
+        <option value="菜" selected>菜</option>
+        <option value="飯">飯</option>
+        <option value="湯">湯</option>
+      </select>
+      <input type="text" id="unit" placeholder="單位(例:份/600g)" required>
+      <select id="special">
+        <option value="否" selected>非冷凍</option>
+        <option value="是">冷凍包裝</option>
+      </select>
+      <button id="addBtn" type="button">新增</button>
+    </div>
+    <hr>
+    <h3>現有菜單</h3>
+    <div id="menuList"></div>
+  </div>
+  <script src="admin_page.js"></script>
+</body>
+</html>
