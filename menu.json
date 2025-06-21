@@ -90,5 +90,14 @@
     "key": "qty11",
     "img": "img/測試.jpg",
     "special": ""
+  },
+  {
+    "name": "豬腳",
+    "price": 450,
+    "type": "菜",
+    "unit": "(份/1800g)",
+    "key": "qty12",
+    "img": "img/豬腳.jpg",
+    "special": "冷凍"
   }
 ]
